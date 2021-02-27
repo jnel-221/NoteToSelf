@@ -29,7 +29,7 @@ app.use(express.static("public"));
 // require("./routes/apiRoutes")(app);
 
 // HTML
-// require("./routes/htmlRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 // =============================================================================
 // LISTENER

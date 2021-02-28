@@ -1,5 +1,5 @@
 //require fs to read db.json, parse and store to variable
-const { notStrictEqual } = require("assert");
+//const { notStrictEqual } = require("assert");
 const fs = require("fs");
 
 let rawdata = fs.readFileSync("./db/db.json");
@@ -31,11 +31,15 @@ module.exports = function (app) {
 
     let returnSavedNotes = JSON.parse(fs.readFileSync("./db/db.json"));
 
-    res.JSON(returnSavedNotes);
+    return res.json(returnSavedNotes);
   });
 
   //   * DELETE `/api/notes/:id` - Should receive a query parameter containing the id of a note to delete. This means you'll need to find a way to give each note a unique `id` when it's saved. In order to delete a note, you'll need to read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
-  app.delete("/api/notes", function (req, res) {
-    console.log("Do you really want to delete this?");
+
+  app.delete("/api/notes/:id", function (req, res) {
+    const noteId = req.params.id;
+    // notes.filter()
+
+    console.log(noteId);
   });
 };

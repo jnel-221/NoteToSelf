@@ -17,6 +17,15 @@ module.exports = function (app) {
     let addNoteId = notes.map((note, index) => ({ id: index + 1, ...note }));
     console.log(addNoteId);
 
+    let allNotes = JSON.stringify(addNoteId);
+
+    let postPath = path.join(__dirname, "../db/db.json");
+
+    fs.writeFile(postPath, allNotes, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
     res.json(newNote);
   });
 

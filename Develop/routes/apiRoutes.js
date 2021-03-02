@@ -25,8 +25,7 @@ module.exports = function (app) {
       }
     });
 
-    //needs review; most recent note not displaying yet.
-    res.json(allNotes);
+    res.json(addNoteId.pop());
   });
 
   app.delete("/api/notes/:id", function (req, res) {

@@ -6,11 +6,18 @@ const path = require("path");
 // Gets all notes
 module.exports = function (app) {
   app.get("/api/notes", function (req, res) {
-   res.json(notes);
+    res.json(notes);
   });
 
   app.post("/api/notes", function (req, res) {
     //receive new note to save on request body. ==> add a unique id to each new note.
+    let newNote = req.body;
+    notes.push(newNote);
+
+    let addNoteId = notes.map((note, index) => ({ id: index + 1, ...note }));
+    console.log(addNoteId);
+
+    res.json(newNote);
   });
 
   app.delete("/api/notes/:id", function (req, res) {});

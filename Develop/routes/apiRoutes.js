@@ -2,48 +2,62 @@
 const fs = require("fs");
 const notes = require("../db/db.json");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = function (app) {
   app.get("/api/notes", function (req, res) {
+    console.log("get request pulls db notes doc", notes);
     res.json(notes);
   });
 
   app.post("/api/notes", function (req, res) {
     let newNote = req.body;
-    notes.push(newNote);
 
-    let addNoteId = notes.map((note, index) => ({ id: index + 1, ...note }));
-    console.log(addNoteId);
+    newNote.id = uuidv4();
 
-    let allNotes = JSON.stringify(addNoteId);
+    if (notes) {
+      notes.push(newNote);
+    } else {
+      notes = [newNote];
+    }
+
+    console.log("addNoteId array shld have id#'s", notes);
+
+    let allNotes = JSON.stringify(notes);
 
     let postPath = path.join(__dirname, "../db/db.json");
 
-    fs.writeFile(postPath, allNotes, (err) => {
+    fs.writeFileSync(postPath, allNotes, (err) => {
       if (err) {
         throw err;
       }
     });
 
-    res.json(addNoteId.pop());
+    console.log("post response ", allNotes);
+    res.json(newNote);
   });
 
   app.delete("/api/notes/:id", function (req, res) {
-    const noteId = parseInt(req.params.id);
+    // fs.readFile(notes,"utf8", (err,data)=>{
+    //   if(err) throw err;
 
-    let myNotes = notes.filter((note) => note.id !== noteId);
+    //   notesToSelf = JSON.parse(data)
 
-    myNotes.forEach((note) => delete note.id);
+    // })
 
-    let newId = myNotes.map((note, index) => ({ id: index + 1, ...note }));
+    const noteId = req.params.id;
 
-    let saveRemainingNotes = JSON.stringify(newId);
+    let myNotes = notes.filter((note) => note.id != noteId);
+
+    console.log("last array ", myNotes);
+    let saveRemainingNotes = JSON.stringify(myNotes);
     let postPath = path.join(__dirname, "../db/db.json");
+
     fs.writeFile(postPath, saveRemainingNotes, (err) => {
       if (err) {
         throw err;
       }
     });
-    res.json(saveRemainingNotes);
+    res.send(true);
   });
 };

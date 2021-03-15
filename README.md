@@ -11,7 +11,7 @@
   ### Link to app deployed on Heroku:
 
   A short demo of functionality:
-  ![gif](./develop/assets/NoteTaker.gif)
+  ![gif](./assets/NoteTaker.gif)
 
   
   ## Table of Contents

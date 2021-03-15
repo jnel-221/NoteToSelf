@@ -10,6 +10,8 @@
 
   ### Link to app deployed on Heroku:
 
+  [Note To Self](https://mysterious-peak-95211.herokuapp.com/)
+
   A short demo of functionality:
   ![gif](./assets/NoteTaker.gif)
 

@@ -4,6 +4,8 @@ const $saveNoteBtn = $(".save-note");
 const $newNoteBtn = $(".new-note");
 const $noteList = $(".list-container .list-group");
 
+//console logs added to help identify bug affecting data-persistance of deleted notes.  The back-end routes appear to be fine, but  still the get that fires after a note is deleted is returning the first set of notes retrieved.
+
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
@@ -28,7 +30,7 @@ const saveNote = (note) => {
 const deleteNote = (id) => {
   console.log(id);
   return $.ajax({
-    url: "/api/notes/" + id,
+    url: "api/notes/" + id,
     method: "DELETE",
   });
 };

@@ -4,6 +4,8 @@ const notes = require("../db/db.json");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
+
+//the routes are functional, however there is a bug which causes data to persist in the front end after it is deleted from the backend.  I have left the console logs while I'm continuing to resolve, but but is not resolved at the time I've turned in the assignment.
 module.exports = function (app) {
   app.get("/api/notes", function (req, res) {
     console.log("get request pulls db notes doc", notes);
@@ -21,8 +23,6 @@ module.exports = function (app) {
       notes = [newNote];
     }
 
-    console.log("addNoteId array shld have id#'s", notes);
-
     let allNotes = JSON.stringify(notes);
 
     let postPath = path.join(__dirname, "../db/db.json");
@@ -38,26 +38,20 @@ module.exports = function (app) {
   });
 
   app.delete("/api/notes/:id", function (req, res) {
-    // fs.readFile(notes,"utf8", (err,data)=>{
-    //   if(err) throw err;
-
-    //   notesToSelf = JSON.parse(data)
-
-    // })
-
     const noteId = req.params.id;
 
     let myNotes = notes.filter((note) => note.id != noteId);
 
-    console.log("last array ", myNotes);
+    console.log("deleted note removed ", myNotes);
     let saveRemainingNotes = JSON.stringify(myNotes);
     let postPath = path.join(__dirname, "../db/db.json");
 
+    console.log("here's what's being sent to writefile ", saveRemainingNotes);
     fs.writeFile(postPath, saveRemainingNotes, (err) => {
       if (err) {
         throw err;
       }
     });
-    res.send(true);
+    res.send(req.body);
   });
 };

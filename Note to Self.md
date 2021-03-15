@@ -7,12 +7,6 @@
   ## Description
 
   An express.js application for writing and storing notes.
-
-  ### Link to app deployed on Heroku:
-
-  A short demo of functionality:
-  ![gif](./develop/assets/NoteTaker.gif)
-
   
   ## Table of Contents
   
@@ -40,7 +34,7 @@
   
   ## Credits
 
-  This application uses [node.js](https://www.npmjs.com/package/node.js), [express.js](https://www.npmjs.com/package/express) server, [uuid](https://www.npmjs.com/package/uuid), and is powered by JavaScript. A shout out to my study group, tutor, and TAs for assistance troubleshooting logic and resolving bugs.
+  This application uses node.js, express.js, uuid, and is powered by JavaScript. A shout out to my study group, tutor, and TAs for assistance troubleshooting logic and resolving bugs.
 
   [Back to Table of Contents](#table-of-contents)
   
@@ -66,6 +60,6 @@
   
   ## License
 
-  This project is licensed under the terms of the [MIT](license) license.
+  This project is licensed under the terms of the MIT license.
   
   [Back to Table of Contents](#table-of-contents)
